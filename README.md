@@ -162,8 +162,8 @@ Before deployment:
 
 ## 👩‍💻 Author
 
-**Pooja**
-Computer Science Engineer | Aspiring Data Engineer / Data Scientist
+**Pooja Parashuram Bajantri**
+Computer Science Engineer | Aspiring Data Scientist / Data Analyst
 
 ---
 
