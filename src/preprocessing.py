@@ -53,17 +53,17 @@ class InsurancePreprocessor:
     def handle_missing(self, df, is_training=True):
         df = df.copy()
 
-        if is_training:
+        if is_training:                        # Learning fill values in the memory during training phase
             for col in self.numerical_features:
                 if col in df:
-                    self.fill_values[col] = df[col].median()
+                    self.fill_values[col] = df[col].median()  # middle value
 
             for col in self.categorical_features:
                 if col in df:
-                    mode = df[col].mode()
+                    mode = df[col].mode()   # common value
                     self.fill_values[col] = mode[0] if len(mode) else "Unknown"
 
-        for col in self.numerical_features:
+        for col in self.numerical_features:     # Filling missing values in prediction phase
             if col in df:
                 df[col] = df[col].fillna(self.fill_values.get(col, 0))
 
@@ -83,16 +83,16 @@ class InsurancePreprocessor:
             if col not in df:
                 continue
 
-            df[col] = df[col].astype(str)
+            df[col] = df[col].astype(str)   # convert text to string type
 
             if is_training:
                 le = LabelEncoder()
-                df[col] = le.fit_transform(df[col])
+                df[col] = le.fit_transform(df[col])  # Fit usually does mapping and transform does text into no.s, [suv, sedan, suv] -> [0,1,0]
                 self.label_encoders[col] = le
                 print(f"  ✓ Encoded {col}: {len(le.classes_)} categories")
             else:
                 le = self.label_encoders[col]
-                df[col] = df[col].apply(
+                df[col] = df[col].apply(                              # If any new category encountered during prediction, assign -1
                     lambda x: le.transform([x])[0] if x in le.classes_ else -1
                 )
 
@@ -101,7 +101,7 @@ class InsurancePreprocessor:
     # --------------------------------------------------
     # SCALING
     # --------------------------------------------------
-    def scale_features(self, df, is_training=True):
+    def scale_features(self, df, is_training=True):    #scaling numerical features like age:30 & vehicale_price:50000 (using mean & std dev)
         df = df.copy()
 
         if is_training:

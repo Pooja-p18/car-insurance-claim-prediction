@@ -206,7 +206,7 @@ SUMMARY:
 VISUALIZATIONS SAVED:
 """)
 
-output_files = sorted([f for f in os.listdir('outputs') if f.endswith('.png')])
+output_files = sorted([f for f in os.listdir('outputs') if f.startswith('0')])
 for i, f in enumerate(output_files, 1):
     print(f"  {i}. outputs/{f}")
 
