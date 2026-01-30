@@ -100,7 +100,7 @@ class FeatureEngineer:
         
         return df_new
     
-    def select_features_statistical(self, X, y, k=20):
+    def select_features_statistical(self, X, y, k=20):    # finding top k features using ANOVA & Mutual Info # Y 
         """
         Select top K features using statistical tests
         
@@ -112,33 +112,33 @@ class FeatureEngineer:
         print(f"STATISTICAL FEATURE SELECTION (Top {k})")
         print("="*60)
         
-        # Method 1: F-statistic
+        # Method 1: F-statistic  # Linear relationship between feature & target
         print("\n[1] F-statistic (ANOVA):")
-        selector_f = SelectKBest(f_classif, k=k)
-        selector_f.fit(X, y)
+        selector_f = SelectKBest(f_classif, k=k)     # f_classif for classification tasks
+        selector_f.fit(X, y)    
         
         f_scores = pd.DataFrame({
-            'Feature': X.columns,
-            'F_Score': selector_f.scores_
+            'Feature': X.columns,   
+            'F_Score': selector_f.scores_   
         }).sort_values('F_Score', ascending=False)
         
         print(f_scores.head(15).to_string(index=False))
         
-        # Method 2: Mutual Information
+        # Method 2: Mutual Information   # Any kind of relationship b/w feature & target including non-linear
         print("\n[2] Mutual Information:")
-        selector_mi = SelectKBest(mutual_info_classif, k=k)
+        selector_mi = SelectKBest(mutual_info_classif, k=k)  
         selector_mi.fit(X, y)
         
         mi_scores = pd.DataFrame({
             'Feature': X.columns,
             'MI_Score': selector_mi.scores_
-        }).sort_values('MI_Score', ascending=False)
+        }).sort_values('MI_Score', ascending=False)                
         
         print(mi_scores.head(15).to_string(index=False))
         
         # Combine scores
         combined = f_scores.merge(mi_scores, on='Feature')
-        combined['Combined_Score'] = (
+        combined['Combined_Score'] = (                       # averaging normalized scores
             combined['F_Score'] / combined['F_Score'].max() +
             combined['MI_Score'] / combined['MI_Score'].max()
         ) / 2
@@ -155,7 +155,7 @@ class FeatureEngineer:
         
         return self.selected_features, combined
     
-    def select_features_rfe(self, X, y, n_features=20):
+    def select_features_rfe(self, X, y, n_features=20): 
         """
         Recursive Feature Elimination using Random Forest
         """
@@ -166,7 +166,7 @@ class FeatureEngineer:
         # Use Random Forest as estimator
         estimator = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
         
-        # RFE
+        # RFE initialization
         print("Running RFE (this may take a few minutes)...")
         rfe = RFE(estimator=estimator, n_features_to_select=n_features, step=1)
         rfe.fit(X, y)
@@ -174,8 +174,8 @@ class FeatureEngineer:
         # Get selected features
         rfe_features = pd.DataFrame({
             'Feature': X.columns,
-            'Selected': rfe.support_,
-            'Ranking': rfe.ranking_
+            'Selected': rfe.support_,    # True/False
+            'Ranking': rfe.ranking_      # 1 is best and 2,3 is eliminated
         }).sort_values('Ranking')
         
         print("\nRFE Results:")
@@ -187,7 +187,7 @@ class FeatureEngineer:
         
         return selected, rfe_features
     
-    def select_features_importance(self, X, y, threshold=0.01):
+    def select_features_importance(self, X, y, threshold=0.01): # keep a strong model
         """
         Select features using Random Forest feature importance
         """
