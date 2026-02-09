@@ -214,7 +214,7 @@ print(f"""
 NEXT STEPS:
 1. Review all visualizations in 'outputs/' folder
 2. Run preprocessing and training: python train.py
-3. Launch Streamlit app: streamlit run streamlit_app.py
+3. Launch Streamlit app: streamlit run app.py
 
 {"="*80}
 """)

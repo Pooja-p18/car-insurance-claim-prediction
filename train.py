@@ -267,7 +267,7 @@ print(f"""
 🚀 NEXT STEPS:
   1. Review model comparison results
   2. Analyze feature importance
-  3. Test Streamlit app: streamlit run streamlit_app.py
+  3. Test Streamlit app: streamlit run app.py
   4. Deploy to cloud (Streamlit Cloud/Heroku)
 
 ✅ Ready for deployment!

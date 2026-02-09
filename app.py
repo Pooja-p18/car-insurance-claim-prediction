@@ -4,6 +4,7 @@ Car Insurance Claim Prediction - Streamlit App
 Clean UI + SAFE preprocessing using trained pipeline
 """
 
+import os
 import streamlit as st
 import pandas as pd
 import pickle
@@ -66,7 +67,9 @@ st.markdown(
 @st.cache_resource
 def load_artifacts():
     preprocessor = InsurancePreprocessor.load("models/preprocessor.pkl")
-    with open("models/best_model.pkl", "rb") as f:
+    # Use tuned model if available, else default best model
+    model_path = "models/best_model_tuned.pkl" if os.path.exists("models/best_model_tuned.pkl") else "models/best_model.pkl"
+    with open(model_path, "rb") as f:
         model = pickle.load(f)
     return preprocessor, model
 

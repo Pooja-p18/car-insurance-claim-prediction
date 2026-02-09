@@ -34,7 +34,7 @@ try:
         model = pickle.load(f)
     model_name = "Best Model (Tuned)"
     print("✓ Loaded: models/best_model_tuned.pkl")
-except:
+except FileNotFoundError:
     with open('models/best_model.pkl', 'rb') as f:
         model = pickle.load(f)
     model_name = "Best Model"
