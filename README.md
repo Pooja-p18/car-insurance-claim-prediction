@@ -172,5 +172,7 @@ Computer Science Engineer | Aspiring Data Scientist / Data Analyst
 This project is for **educational and portfolio purposes**.
 
 ---
+Deployment link:
+https://car-insurance-claim-prediction-system.streamlit.app/
 
 ⭐ If you found this project useful, consider giving it a star!
