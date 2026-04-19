@@ -12,8 +12,8 @@ Insurance companies need to accurately assess risk to price policies and manage 
 
 * End‑to‑end ML pipeline (EDA → training → evaluation → deployment)
 * Handles **class imbalance** using 
-- :contentReference[oaicite:0]{index=0}
-- Class-weighted models (LightGBM, XGBoost)
+  - :contentReference[oaicite:0]{index=0}
+  - Class-weighted models (LightGBM, XGBoost)
 * Interactive **Streamlit** web interface
 * Supports **single prediction** (and optional batch prediction)
 * Clean, modular, and portfolio‑ready structure
@@ -144,8 +144,8 @@ The model prioritizes recall to capture more claim cases, which is critical in i
 
 * The model is optimized for **recall to minimize missed claim cases**
 * Due to class imbalance:
- - Higher recall ensures better detection of claims
- - Lower precision indicates more false positives (acceptable trade-off)
+  - Higher recall ensures better detection of claims
+  - Lower precision indicates more false positives (acceptable trade-off)
 * This reflects a real-world business scenario where missing a claim is costlier than a false alert.
 
 ---
