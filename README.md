@@ -20,7 +20,7 @@ Insurance companies need to accurately assess risk to price policies and manage 
 
 ## 🧠 Machine Learning & System Design Details
 
-* **Model (Final Estimator)**: RandomForestClassifier
+* **Model (Final Estimator)**: LightGBM
 * **Pipeline Components**: Data preprocessing, feature alignment, model inference, probability calibration, and UI‑level validation
 * **Problem Type**: Binary Classification (Claim / No Claim)
 * **Evaluation Metric**: ROC‑AUC (primary), Precision, Recall
