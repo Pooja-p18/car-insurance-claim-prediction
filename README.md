@@ -11,7 +11,9 @@ Insurance companies need to accurately assess risk to price policies and manage 
 ### Key Highlights
 
 * End‑to‑end ML pipeline (EDA → training → evaluation → deployment)
-* Handles **class imbalance** using `class_weight="balanced"`
+* Handles **class imbalance** using 
+- :contentReference[oaicite:0]{index=0}
+- Class-weighted models (LightGBM, XGBoost)
 * Interactive **Streamlit** web interface
 * Supports **single prediction** (and optional batch prediction)
 * Clean, modular, and portfolio‑ready structure
@@ -128,11 +130,32 @@ The app will open at: `http://localhost:8501`
 
 ---
 
+## 📊 Model Performance
+Best Model: LightGBM
+
+- Recall: ~61%
+- Precision: ~9.5%
+- F1-Score: ~0.16
+- ROC-AUC: ~0.65
+
+The model prioritizes recall to capture more claim cases, which is critical in insurance risk prediction.
+
 ## 📊 Model Evaluation (Summary)
 
-* The model produces **stable and interpretable probabilities**
-* Predictions respond logically to risk‑increasing and risk‑reducing features
-* Suitable for **demonstration and educational purposes**
+* The model is optimized for **recall to minimize missed claim cases**
+* Due to class imbalance:
+ - Higher recall ensures better detection of claims
+ - Lower precision indicates more false positives (acceptable trade-off)
+* This reflects a real-world business scenario where missing a claim is costlier than a false alert.
+
+---
+
+## 💡 Key Insights
+
+* Class imbalance significantly affects model performance
+* Accuracy is not a reliable metric for imbalanced datasets
+* Recall and F1-score provide better evaluation
+* LightGBM performed best among all models
 
 ---
 
